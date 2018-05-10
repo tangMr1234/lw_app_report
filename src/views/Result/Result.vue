@@ -1,7 +1,11 @@
 <template>
   <div class="details" style="height:100%;">
     <!-- 头部 -->
-    <x-header :title="this.$route.name" style="background-color:#409eff;"></x-header>
+    <x-header :title="this.$route.name" style="background-color:#409eff;">
+      <div slot="right" style="color:#fff;" @click="show7=true">
+        <small style="vertical-align: top;">操作</small>
+      </div>
+    </x-header>
     <!-- 主体 -->
     <!-- 操作栏目 -->
     <div v-transfer-dom>
@@ -9,9 +13,7 @@
         v-model="show7"
         :menus="menu7"
         theme="android"
-        @on-click-menu="click"
-        @on-after-hide="log('after hide')"
-        @on-after-show="log('after show')">
+        @on-click-menu="click">
       </actionsheet>
     </div>
     <div v-transfer-dom>
@@ -44,7 +46,6 @@
     <!-- 展示 -->
     <b-scroll class="wrapper" style="height:calc(100% - 46px);">
       <div class="content">
-        <a @click="show7=true">111</a>
         <!-- 加载组件 -->
         <component :is="item.component" :text="item.text" v-for="(item, index) in items" :key="index"
                    style="margin:20px 0;"></component>
@@ -54,7 +55,7 @@
 </template>
 
 <script type="es6">
-  import {XHeader, Actionsheet, Popup, Group, Cell, XButton, XInput, Radio, TransferDom} from 'vux'
+  import {XHeader, Actionsheet, Popup, Group, Cell, Box, XButton, XInput, Radio, TransferDom} from 'vux'
   import aComponent from '@/views/Result/Grid.vue'
   import bComponent from '@/views/Result/Curve.vue'
 
@@ -68,6 +69,7 @@
       Popup,
       Group,
       Cell,
+      Box,
       XButton,
       XInput,
       Radio,
